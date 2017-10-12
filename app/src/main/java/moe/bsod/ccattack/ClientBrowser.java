@@ -50,10 +50,7 @@ public class ClientBrowser extends Thread {
 
 	public void terminate() {
 		threadAlive = false;
-		synchronized (runningLock) {
-			// Let us sure the method returns when thread exit.
-			threadAlive = false;
-		}
+		this.interrupt();
 	}
 
 	public boolean isTerminate() {
@@ -67,6 +64,9 @@ public class ClientBrowser extends Thread {
 
 				try {
 					URLConnection conn = urlreq.openConnection();
+					conn.setDoInput(true);
+					conn.setConnectTimeout(3000);
+					conn.setReadTimeout(3000);
 					conn.getInputStream().read(buf);
 					req_count++;
 				} catch (FileNotFoundException e) {

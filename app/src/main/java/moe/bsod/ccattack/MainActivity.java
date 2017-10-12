@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 				switch (message.what) {
 					case ClientMan.CLIENTMAN_START:
 						btn_start.setText(R.string.btn_onStart);
+						btn_start.setEnabled(true);
 						break;
 
 					case ClientMan.CLIENTMAN_DIED:
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 						req.setText("0");
 						fail.setText("0");
 						btn_start.setText(R.string.btn_onStop);
+						btn_start.setEnabled(true);
 						break;
 
 					case ClientMan.CLIENTMAN_UPDATE_DATA:
@@ -75,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				if (btn_start.getText().equals(getResources().getString(R.string.btn_onStart))) {
+					btn_start.setEnabled(false);
 					btn_start.setText(R.string.btn_onwait);
+
 					cm.terminate();
 				} else {
+
+					btn_start.setEnabled(false);
 					btn_start.setText(R.string.btn_onwait);
 
 					String url = et_url.getText().toString();
